@@ -14,12 +14,17 @@ const pantsURL = `https://openapi.etsy.com/v2/listings/active?keywords=WOMANS+JE
 //función para pintar poducto
 
 function handleResponse(data) {
+    let template = ' ';
     let container = document.getElementById('container');
     console.log(container);
     let results = data.results;
     results.forEach(product => {
-      let template = 
-    })
+      let price = product.price;
+      console.log(price);
+     template += `<div>precio:${price}</div>`
+     
+    })   
+    container.innerHTML=template;
 }
 
 //petición api etsy

@@ -3,9 +3,8 @@ var provider = new firebase.auth.GoogleAuthProvider();
 $('#login').click(function(){
     firebase.auth()
     .signInWithPopup(provider).then(function(result) {
-    });
-        console.log(result.user);
-        $('#login')
+      console.log(result.user);
+        $('#login')});
 });
 
   // Initialize Firebase

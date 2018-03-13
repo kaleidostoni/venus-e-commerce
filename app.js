@@ -11,9 +11,22 @@ const underwaerURL = `https://openapi.etsy.com/v2/listings/active?keywords=brale
 const tShirtsURL = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 const pantsURL = `https://openapi.etsy.com/v2/listings/active?keywords=womans+jeans&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 
-const paintingData = (response=>{
+const placingTemplate = ((template,e)=>{
+    let container = document.getElementById('container');
+    console.log(container);
+    let divContainers = container.getElementsByTagName('div');
+    let divArray = Array.from(divContainers);
+    console.log(divArray);
+    divArray.forEach(container=>{
+        if(container.id === e.target.data.category){
+            container.innerHTML= template;
+        }
+    })
+
+})
+
+const paintingData = ((response,e)=>{
 let template = ' ';
-let container = document.getElementById('container');
     response.forEach(product=>{
     let price = product.price;
     // console.log(price);
@@ -36,15 +49,15 @@ template +=`  <div class="row">
 </div>
 </div>`
 })
-container.innerHTML = template;
+placingTemplate(template,e);
 })
 
 //guardando data
-const handleResponse=(response=>{
+const handleResponse=((response,e)=>{
     // console.log(response)
 let results = response.results;
 console.log(results[0]) 
-paintingData(results);
+paintingData(results,e);
 })
 
 //evento a las pestañas del menu de productos
@@ -55,7 +68,7 @@ const requestProducts = ( e =>{
     // let url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=${resquestCategory}&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
     const url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
     fetch(url)
-            .then(response => response.json()).then(json => handleResponse(json));
+            .then(response => response.json()).then(json => handleResponse(json,e));
 
     })
     

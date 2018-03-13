@@ -36,17 +36,19 @@ const paintingData = ((response, e) => {
         // console.log(tag);
         let photo = product.Images[0].url_570xN;
         // console.log(photo);
+        let id = product.listing_id
+        // console.log(id);
         template += `
 <div class="col s12 m3">
   <div class="card">
     <div class="card-image">
       <img src="${photo}">
       <span class="card-title">${price}</span>
-      <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+      <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
       <p>${tag}</p>
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
+      <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-id='${id}'><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
     </div>
   </div>
 </div>
@@ -57,9 +59,9 @@ const paintingData = ((response, e) => {
 
 // //guardando data
 const handleResponse = ((response, e) => {
-    // console.log(response)
     let results = response.results;
-    // console.log(results[0])
+    localStorage.setItem('data',JSON.stringify(results))
+    console.log(results)
     paintingData(results, e);
 })
 
@@ -93,6 +95,25 @@ const tabList = () => {
     eventMenu(menuArray);
 }
 tabList();
+
+const cartArray = []
+
+function saveCartProducts(){
+  let productElement = parseInt(event.target.dataset.id);
+  let data = JSON.parse(localStorage.getItem('data'));
+  let selectedProduct = data.find(product => {
+    return product.listing_id === productElement;
+  })
+  cartArray.push(selectedProduct)
+  localStorage.setItem('cart-data',JSON.stringify(cartArray))
+
+  paintInCart()
+}
+
+function paintInCart() {
+  let productsArray = JSON.parse(localStorage.getItem('cart-data'));
+  console.log(productsArray);
+}
 
 // routing
 page('/t-shirts', e => {

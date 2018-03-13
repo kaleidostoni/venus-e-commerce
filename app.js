@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
     $(".button-collapse").sideNav();
 })
@@ -78,7 +76,7 @@ const requestProducts = (e => {
 
 })
 
-//añadiendo evento a los elementos li 
+//añadiendo evento a los elementos li
 const eventMenu = (menu => {
     menu.forEach(item => {
         item.addEventListener('click', requestProducts);
@@ -94,6 +92,68 @@ const tabList = () => {
 }
 tabList();
 
+// routing
+page('/t-shirts', e => {
+ console.log('go');
+})
 
+page('/blouses', e => {
 
+})
 
+page('/dresses', e => {
+
+})
+
+page('/jeans', e => {
+
+})
+
+page('/cardigans', e => {
+
+})
+
+page('/home', e => {
+
+})
+
+page('/favorites', e => {
+
+})
+
+document
+.querySelector('.router-tshirts')
+.addEventListener('click', e => {
+    e.preventDefault()
+    page('/t-shirts')
+  })
+
+document
+  .querySelector('.router-blouses')
+  .addEventListener('click', e => {
+    e.preventDefault()
+    page('/blouses')
+  })
+
+document
+  .querySelector('.router-dresses')
+  .addEventListener('click', e => {
+    e.preventDefault()
+    page('/dresses')
+  })
+
+document
+  .querySelector('.router-jeans')
+  .addEventListener('click', e => {
+    e.preventDefault()
+    page('/jeans')
+  })
+
+document
+  .querySelector('.router-cardigans')
+  .addEventListener('click', e => {
+    e.preventDefault()
+    page('/cardigans')
+  })
+
+page.start({hashbang:true})

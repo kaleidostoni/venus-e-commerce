@@ -12,16 +12,38 @@ const tShirtsURL = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com
 const pantsURL = `https://openapi.etsy.com/v2/listings/active?keywords=womans+jeans&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 
 const paintingData = (response=>{
-response.forEach(product=>{
+let template = ' ';
+let container = document.getElementById('container');
+    response.forEach(product=>{
     let price = product.price;
-    console.log(price);
+    // console.log(price);
+    let tag = product.tags[0];
+    // console.log(tag);
+    let photo = product.Images[0].url_570xN;
+    // console.log(photo);
+template +=`  <div class="row">
+<div class="col s12 m3">
+  <div class="card">
+    <div class="card-image">
+      <img src="${photo}">
+      <span class="card-title">${price}</span>
+      <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+    </div>
+    <div class="card-content">
+      <p>${tag}</p>
+    </div>
+  </div>
+</div>
+</div>`
 })
+container.innerHTML = template;
 })
 
 //guardando data
 const handleResponse=(response=>{
+    // console.log(response)
 let results = response.results;
-console.log(results) 
+console.log(results[0]) 
 paintingData(results);
 })
 

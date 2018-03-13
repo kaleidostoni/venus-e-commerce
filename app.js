@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
     $(".button-collapse").sideNav();
+    $('#modal1').modal();
 })
 
 // const cardigansURL = `https://openapi.etsy.com/v2/listings/active?keywords=cardigan%20knit%20woman&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
@@ -47,6 +48,7 @@ const paintingData = ((response, e) => {
     </div>
     <div class="card-content">
       <p>${tag}</p>
+      <a class="waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
     </div>
   </div>
 </div>

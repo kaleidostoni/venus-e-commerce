@@ -1,13 +1,3 @@
-//login con firebase
-var provider = new firebase.auth.GoogleAuthProvider();
-$('#login').click(function(){
-    firebase.auth()
-    .signInWithPopup(provider).then(function(result) {
-    });
-        console.log(result.user);
-        $('#login')
-});
-
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyCKrr1DaJn5pk7YYccD1itP5FDlxgXerIE",
@@ -18,3 +8,45 @@ $('#login').click(function(){
     messagingSenderId: "829622324466"
   };
   firebase.initializeApp(config);
+
+//login con firebase
+var provider = new firebase.auth.GoogleAuthProvider();
+
+$('#login').click(function(){
+    firebase.auth()
+    .signInWithPopup(provider)
+    .then(function(result) {
+        console.log(result.user);
+        save(result.user);
+        $('#login').hide();
+        $('#pseudo').append('<img src="'+result.user.photoURL+'"/>')
+      });
+      
+});
+//función que guardo los datos automaticamente
+function save(user) {
+  var user = {
+    uid:user.uid,
+    nombre:user.displayName,
+    email:user.email,
+    foto:user.photoURL
+  }
+  firebase.database().ref('venus/' + user.iud) //guarda en rama siempre que el usuario inicie sesión
+  .set(user)
+}
+
+//guardar en base de datos
+$('#pseudo').click(function () {
+  firebase.database().ref('venus')
+  .set({
+    nombre: 'BlisS',
+    edad: '15',
+  })        
+});
+
+//Base de datos
+firebase.database().ref('venus')
+.on('child_added', function(s){
+  var user = s.val();
+  $('#pseudo').append('<img width="50vh" src= "'+user.foto+'"/>');  
+})

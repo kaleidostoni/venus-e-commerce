@@ -1,6 +1,6 @@
 //login con firebase
 var provider = new firebase.auth.GoogleAuthProvider();
-
+   
 $('#login').click(function(){
     firebase.auth()
     .signInWithPopup(provider)

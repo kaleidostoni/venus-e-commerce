@@ -37,7 +37,7 @@ const paintingData = ((response, e) => {
         // console.log(tag);
         let photo = product.Images[0].url_570xN;
         // console.log(photo);
-        template += `  <div class="row">
+        template += `
 <div class="col s12 m3">
   <div class="card">
     <div class="card-image">
@@ -50,7 +50,7 @@ const paintingData = ((response, e) => {
     </div>
   </div>
 </div>
-</div>`
+`
     })
     placingTemplate(template, e);
 })

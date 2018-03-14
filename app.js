@@ -44,7 +44,6 @@ const placingTemplate = ((template, e) => {
 })
 
 const paintingData = ((response, e) => {
-
     let template = ' ';
     response.forEach(product => {
         let price = product.price;
@@ -59,12 +58,12 @@ const paintingData = ((response, e) => {
 <div class="col s12 m3">
   <div class="card">
     <div class="card-image">
-      <img src="${photo}">
+      <img src="${photo}" style='height:45vh'>
       <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
       <h5>${tag}</h5>
-      <a class="waves-effect waves-light btn modal-trigger pink" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i></a>
+      <a class="waves-effect waves-light btn modal-trigger pink center" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i>  Quick View</a>
       <span class="card-title price-card">${price} USD</span>
       </div>
   </div>

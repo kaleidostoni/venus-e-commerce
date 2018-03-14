@@ -1,15 +1,13 @@
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCKrr1DaJn5pk7YYccD1itP5FDlxgXerIE",
-    authDomain: "venus-ecommerce.firebaseapp.com",
-    databaseURL: "https://venus-ecommerce.firebaseio.com",
-    projectId: "venus-ecommerce",
-    storageBucket: "venus-ecommerce.appspot.com",
-    messagingSenderId: "829622324466"
-  };
-  firebase.initializeApp(config);
+var config = {
+  apiKey: "AIzaSyCKrr1DaJn5pk7YYccD1itP5FDlxgXerIE",
+  authDomain: "venus-ecommerce.firebaseapp.com",
+  databaseURL: "https://venus-ecommerce.firebaseio.com",
+  projectId: "venus-ecommerce",
+  storageBucket: "venus-ecommerce.appspot.com",
+  messagingSenderId: "829622324466"
+};
+firebase.initializeApp(config);
 
-//login con firebase
 var provider = new firebase.auth.GoogleAuthProvider();
 
 $('#login').click(function(){
@@ -19,7 +17,9 @@ $('#login').click(function(){
         console.log(result.user);
         save(result.user);
         $('#login').hide();
-        $('#pseudo').append('<img src="'+result.user.photoURL+'"/>')
+        $('#pseudo').innerHTML = "";
+        
+        $('#pseudo').append('<img width="50vh" vspace=10vh; src="'+result.user.photoURL+'" />')
       });
       
 });
@@ -39,14 +39,15 @@ function save(user) {
 $('#pseudo').click(function () {
   firebase.database().ref('venus')
   .set({
-    nombre: 'BlisS',
-    edad: '15',
+    // nombre: 'prueba',
+    // edad: '0',
   })        
 });
 
-//Base de datos
-firebase.database().ref('venus')
-.on('child_added', function(s){
-  var user = s.val();
-  $('#pseudo').append('<img width="50vh" src= "'+user.foto+'"/>');  
-})
+// //Base de datos
+// firebase.database().ref('venus')
+// .on('child_added', function(s){
+//   var user = s.val();
+//   $('#pseudo').append('<img width="50vh" vspace=10vh; src= "'+user.foto+'"/>');  
+//   // document.getElementById('login').innerHTML = 'logout';
+// })

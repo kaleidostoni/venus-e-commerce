@@ -34,16 +34,22 @@
                             <i class="material-icons dropdown-button btn black" data-activates='cart'>shopping_bascket</i>
                     </a>
                     <ul id='cart' class='dropdown-content'>
-                        <li>
-                            <a href="#!">one</a>
-                        </li>
-                        <li>
-                            <a href="#!">two</a>
-                        </li>
+                      <li class="deep-orange lighten-4">
+                        <div class="">My bag</div>
+                      </li>
+                      <li>
+                        <ul id='cart-detail'>
+
+                        </ul>
+                      </li>
+                      <li>
+                        <p>Total $<span class="total-cart">0.00</span></p>
+                      </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#" id="login">Log In</a>
+                    <a  id="login">Log In</a>
+                    <span id="pseudo"></span>
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
@@ -183,11 +189,6 @@
             </div>
         </div>
     </footer>
-
-
-
-
-
 
 
     <!-- Compiled and minified JavaScript -->

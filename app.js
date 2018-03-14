@@ -1,3 +1,5 @@
+const cartArray = [];
+
 $(document).ready(function () {
     $(".button-collapse").sideNav();
     $('#modal1').modal();
@@ -107,28 +109,60 @@ const tabList = () => {
 }
 tabList();
 
-const cartArray = []
-
 function saveCartProducts(){
   let productElement = parseInt(event.target.dataset.id);
-  let data = JSON.parse(localStorage.getItem('data'));
-  let selectedProduct = data.find(product => {
+  let selectedProduct = JSON.parse(localStorage.getItem('data')).find(product => {
     return product.listing_id === productElement;
   })
-  cartArray.push(selectedProduct)
+  let productData = {
+    'name': selectedProduct.tags[0],
+    'image': selectedProduct.Images[0].url_570xN,
+    'price': selectedProduct.price
+  }
+  cartArray.push(productData)
   localStorage.setItem('cart-data',JSON.stringify(cartArray))
-
-  paintInCart()
 }
+
 
 function paintInCart() {
   let productsArray = JSON.parse(localStorage.getItem('cart-data'));
   // console.log(productsArray);
 }
 
+document
+  .querySelector('.dropdown-button')
+  .addEventListener('click', function () {
+    $('#cart-detail').empty();
+    let productsArray = JSON.parse(localStorage.getItem('cart-data'))
+    .forEach(product => {
+      let template = ''
+      template +=
+      `<li>
+        <div class='row'>
+          <img class='col s3' src='${product.image}' alt=''>
+          <div class='col s7'>
+            <p>${product.name}</p>
+            <p>Fecha estimada de entrega</p>
+          </div>
+          <div class='col s2'>
+            <p>${product.price}</p>
+          </div>
+        </div>
+      </li>`
+      $('#cart-detail')
+      .append(template);
+    })
+    let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
+    .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
+    $('.total-cart').text(totalCart)
+  })
+
 // routing
 page('/t-shirts', e => {
+<<<<<<< HEAD
+=======
 //  console.log('go');
+>>>>>>> upstream/master
 })
 
 page('/blouses', e => {

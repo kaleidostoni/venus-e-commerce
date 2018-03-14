@@ -16,7 +16,7 @@
 <body>
     <!-- Navbar -->
     <nav class="nav-extended">
-        <div class="nav-wrapper  pink">
+        <div class="nav-wrapper red lighten-5">
             <img src="assets/images/venus-light.png" class="logo" alt="logo">
             <!-- <a href="#" class="brand-logo">VENUS</a> -->
             <a href="#" data-activates="mobile-demo" class="button-collapse">
@@ -29,9 +29,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <div class="nav-wrapper pink">
-                            <i class="material-icons dropdown-button btn black" data-activates='cart'>shopping_bascket</i>
+                    <a href="#" class="get-total">
+                        <div class="nav-wrapper deep-orange lighten-4">
+                            <i class="material-icons dropdown-button btn deep-orange lighten-4" data-activates='cart'>shopping_bascket</i>
                     </a>
                     <ul id='cart' class='dropdown-content'>
                       <li class="deep-orange lighten-4">
@@ -44,12 +44,12 @@
                       </li>
                       <li>
                         <p>Total $<span class="total-cart">0.00</span></p>
+                        <div id="paypal-button-container"></div>
                       </li>
                     </ul>
                 </li>
                 <li>
-                    <a  id="login">Log In</a>
-                    <span id="pseudo"></span>
+                    <a href="#" id="login">Log In</a>
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
@@ -191,11 +191,17 @@
     </footer>
 
 
+
+
+
+
+
     <!-- Compiled and minified JavaScript -->
     <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script src="app.js"></script>
     <script src="login.js"></script>
 </body>

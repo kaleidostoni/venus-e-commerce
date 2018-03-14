@@ -1,8 +1,10 @@
 const cartArray = [];
 
 $(document).ready(function () {
-    $(".button-collapse").sideNav();
-    $('#modal1').modal();
+  $(".button-collapse").sideNav();
+  $('#modal1').modal();
+  $('.carousel.carousel-slider').carousel({fullWidth: true});
+
 })
 
 // const cardigansURL = `https://openapi.etsy.com/v2/listings/active?keywords=cardigan%20knit%20woman&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
@@ -12,36 +14,37 @@ $(document).ready(function () {
 // const tShirtsURL = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 // const pantsURL = `https://openapi.etsy.com/v2/listings/active?keywords=womans+jeans&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 
-const getProductDetails=()=>{
-let tagData = event.target.dataset.tag;
-let photoData = event.target.dataset.photo;
-let priceData =event.target.dataset.price;
-let name = document.getElementById('name');
-let price = document.getElementById('price');
-let photo = document.getElementById('photo');
-name.innerText = tagData;
-price.innerText = `${priceData} USD`;
-photo.src = photoData;
+const getProductDetails = () => {
+  let tagData = event.target.dataset.tag;
+  let photoData = event.target.dataset.photo;
+  let priceData = event.target.dataset.price;
+  let name = document.getElementById('name');
+  let price = document.getElementById('price');
+  let photo = document.getElementById('photo');
+  name.innerText = tagData;
+  price.innerText = `${priceData} USD`;
+  photo.src = photoData;
 }
 
 const placingTemplate = ((template, e) => {
-    // console.log(e.target);
-    // console.log(e.target.dataset.category);
-    let container = document.getElementById('container');
-    // console.log(container);
-    let divContainers = container.getElementsByTagName('div');
-    let divArray = Array.from(divContainers);
-    // console.log(divArray);
-    divArray.forEach(container => {
-        if (container.id === e.target.dataset.category) {
-            // console.log(container.id);
-            container.innerHTML= template;
-        }
-    })
+  // console.log(e.target);
+  // console.log(e.target.dataset.category);
+  let container = document.getElementById('container');
+  // console.log(container);
+  let divContainers = container.getElementsByTagName('div');
+  let divArray = Array.from(divContainers);
+  // console.log(divArray);
+  divArray.forEach(container => {
+    if (container.id === e.target.dataset.category) {
+      // console.log(container.id);
+      container.innerHTML = template;
+    }
+  })
 
 })
 
 const paintingData = ((response, e) => {
+
     let template = ' ';
     response.forEach(product => {
         let price = product.price;
@@ -60,54 +63,55 @@ const paintingData = ((response, e) => {
       <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
+      <h5>${tag}</h5>
       <a class="waves-effect waves-light btn modal-trigger pink" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i></a>
       <span class="card-title price-card">${price} USD</span>
-      <h5>${tag}</h5>
       </div>
   </div>
 </div>
 `
-    })
-    placingTemplate(template, e);
+  })
+  placingTemplate(template, e);
 })
 
 // //guardando data
 const handleResponse = ((response, e) => {
-    let results = response.results;
-    localStorage.setItem('data',JSON.stringify(results))
-    // console.log(results)
-    paintingData(results, e);
+  let results = response.results;
+  localStorage.setItem('data', JSON.stringify(results))
+  // console.log(results)
+  paintingData(results, e);
 })
 
 //evento a las pestañas del menu de productos
 const requestProducts = (e => {
-    e.preventDefault();
-    // console.log(e);
-    let requestCategory = e.target.dataset.menu;
-    // console.log(requestCategory);
+  e.preventDefault();
+  // console.log(e);
+  let requestCategory = e.target.dataset.menu;
+  // console.log(requestCategory);
 
-    let url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=${requestCategory}&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
-    // console.log(url);
-    fetch(url)
-        .then(response => response.json()).then(json => handleResponse(json, e));
+  let url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=${requestCategory}&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
+  // console.log(url);
+  fetch(url)
+    .then(response => response.json()).then(json => handleResponse(json, e));
 
 })
 
 //añadiendo evento a los elementos li
 const eventMenu = (menu => {
-    menu.forEach(item => {
-        item.addEventListener('click', requestProducts);
-    })
+  menu.forEach(item => {
+    item.addEventListener('click', requestProducts);
+  })
 })
 
 //llamando los elementos li del menu
 const tabList = () => {
-    let menu = document.getElementsByClassName('tab');
-    let menuArray = Array.from(menu);
-    // console.log(menuArray);
-    eventMenu(menuArray);
+  let menu = document.getElementsByClassName('tab');
+  let menuArray = Array.from(menu);
+  // console.log(menuArray);
+  eventMenu(menuArray);
 }
 tabList();
+
 
 //función que almacena los productos seleccionados por el usuario
 function saveCartProducts(){
@@ -121,7 +125,7 @@ function saveCartProducts(){
     'price': selectedProduct.price
   }
   cartArray.push(productData)
-  localStorage.setItem('cart-data',JSON.stringify(cartArray))
+  localStorage.setItem('cart-data', JSON.stringify(cartArray))
 }
 
 //función que pinta los datos en el carrito
@@ -130,10 +134,10 @@ document
   .addEventListener('click', function () {
     $('#cart-detail').empty();
     let productsArray = JSON.parse(localStorage.getItem('cart-data'))
-    .forEach(product => {
-      let template = ''
-      template +=
-      `<li>
+      .forEach(product => {
+        let template = ''
+        template +=
+          `<li>
         <div class='row'>
           <img class='col s3' src='${product.image}' alt=''>
           <div class='col s7'>
@@ -154,7 +158,7 @@ document
 //función para obtener el total de los productos seleccionados
   function getTotalCart() {
     let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
-    .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
+      .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
     $('.total-cart').text(totalCart)
     getPayPal(totalCart)
   }
@@ -224,8 +228,8 @@ page('/favorites', e => {
 })
 
 document
-.querySelector('.router-tshirts')
-.addEventListener('click', e => {
+  .querySelector('.router-tshirts')
+  .addEventListener('click', e => {
     e.preventDefault()
     page('/t-shirts')
   })
@@ -258,4 +262,4 @@ document
     page('/cardigans')
   })
 
-page.start({hashbang:true})
+page.start({ hashbang: true })

@@ -21,7 +21,6 @@ $('#login').click(function(){
 
       $('#pseudo').append('<img width="50vh" vspace=10vh; src="'+result.user.photoURL+'" />')
     });
-
 });
 //función que guardo los datos automaticamente
 function save(user) {

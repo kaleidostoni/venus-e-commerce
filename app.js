@@ -26,19 +26,19 @@ const getProductDetails = () => {
 }
 
 const placingTemplate = ((template, e) => {
-    console.log(e.target);
-    console.log(e.target.dataset.category);
-    let container = document.getElementById('container');
-    // console.log(container);
-    let divContainers = container.getElementsByTagName('div');
-    let divArray = Array.from(divContainers);
-    console.log(divArray);
-    divArray.forEach(container => {
-        if (container.id === e.target.dataset.category) {
-            console.log(container.id);
-            container.innerHTML= template;
-        }
-    })
+  // console.log(e.target);
+  // console.log(e.target.dataset.category);
+  let container = document.getElementById('container');
+  // console.log(container);
+  let divContainers = container.getElementsByTagName('div');
+  let divArray = Array.from(divContainers);
+  // console.log(divArray);
+  divArray.forEach(container => {
+    if (container.id === e.target.dataset.category) {
+      // console.log(container.id);
+      container.innerHTML = template;
+    }
+  })
 
 })
 
@@ -66,8 +66,7 @@ const paintingData = ((response, e) => {
       <span class="card-title price-card">${price} USD</span>
       </div>
   </div>
-</div>
-`
+</div>`
   })
   placingTemplate(template, e);
 })
@@ -75,42 +74,40 @@ const paintingData = ((response, e) => {
 
 // //guardando data
 const handleResponse = ((response, e) => {
-    let results = response.results;
-    localStorage.setItem('data',JSON.stringify(results))
-    console.log(results)
-    paintingData(results, e);
+  let results = response.results;
+  localStorage.setItem('data', JSON.stringify(results))
+  // console.log(results)
+  paintingData(results, e);
 })
 
 //evento a las pestañas del menu de productos
 const requestProducts = (e => {
-    e.preventDefault();
-    // console.log(e);
-    let requestCategory = e.target.dataset.menu;
-    // console.log(requestCategory);
+  e.preventDefault();
+  // console.log(e);
+  let requestCategory = e.target.dataset.menu;
+  // console.log(requestCategory);
 
-    let url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=${requestCategory}&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
-    // // const url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
-    // console.log(url);
-    fetch(url)
-        .then(response => response.json()).then(json => handleResponse(json, e));
+  let url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=${requestCategory}&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
+  // console.log(url);
+  fetch(url)
+    .then(response => response.json()).then(json => handleResponse(json, e));
 
 })
 
 //añadiendo evento a los elementos li
 const eventMenu = (menu => {
-    menu.forEach(item => {
-        item.addEventListener('click', requestProducts);
-    })
+  menu.forEach(item => {
+    item.addEventListener('click', requestProducts);
+  })
 })
 
 //llamando los elementos li del menu
 const tabList = () => {
-    let menu = document.getElementsByClassName('tab');
-    let menuArray = Array.from(menu);
-    // console.log(menuArray);
-    eventMenu(menuArray);
+  let menu = document.getElementsByClassName('tab');
+  let menuArray = Array.from(menu);
+  // console.log(menuArray);
+  eventMenu(menuArray);
 }
-
 tabList();
 
 //función que almacena los productos seleccionados por el usuario
@@ -125,7 +122,7 @@ function saveCartProducts(){
     'price': selectedProduct.price
   }
   cartArray.push(productData)
-  localStorage.setItem('cart-data',JSON.stringify(cartArray))
+  localStorage.setItem('cart-data', JSON.stringify(cartArray))
 }
 
 //función que pinta los datos en el carrito
@@ -134,10 +131,10 @@ document
   .addEventListener('click', function () {
     $('#cart-detail').empty();
     let productsArray = JSON.parse(localStorage.getItem('cart-data'))
-    .forEach(product => {
-      let template = ''
-      template +=
-      `<li>
+      .forEach(product => {
+        let template = ''
+        template +=
+          `<li>
         <div class='row'>
           <img class='col s3' src='${product.image}' alt=''>
           <div class='col s7'>
@@ -158,7 +155,7 @@ document
 //función para obtener el total de los productos seleccionados
   function getTotalCart() {
     let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
-    .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
+      .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
     $('.total-cart').text(totalCart)
     getPayPal(totalCart)
   }
@@ -197,7 +194,7 @@ document
           }, '#paypal-button-container');
       }
 
-// routing
+// funciones para routing
 page('/t-shirts', e => {
 })
 
@@ -226,8 +223,8 @@ page('/favorites', e => {
 })
 
 document
-.querySelector('.router-tshirts')
-.addEventListener('click', e => {
+  .querySelector('.router-tshirts')
+  .addEventListener('click', e => {
     e.preventDefault()
     page('/t-shirts')
   })
@@ -260,4 +257,4 @@ document
     page('/cardigans')
   })
 
-page.start({hashbang:true})
+page.start({ hashbang: true })

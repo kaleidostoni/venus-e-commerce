@@ -10,5 +10,16 @@
   }
      
   .logo {
-    width: 80vh;
+    width: 60vh;
+    margin-bottom: 0;
   }
+
+  #photo {
+    width: 20vw;
+  }
+
+  .photo-container {
+    width: 20vw;
+  }
+
+  

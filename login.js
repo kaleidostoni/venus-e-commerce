@@ -7,7 +7,6 @@ var config = {
   messagingSenderId: "829622324466"
 };
 firebase.initializeApp(config);
-
 var provider = new firebase.auth.GoogleAuthProvider();
 
 $('#login').click(function(){

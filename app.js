@@ -161,7 +161,6 @@ document
 
 // routing
 page('/t-shirts', e => {
-
 })
 
 page('/blouses', e => {

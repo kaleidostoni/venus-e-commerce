@@ -46,7 +46,7 @@ const paintingData = ((response, e) => {
     response.forEach(product => {
         let price = product.price;
         // console.log(price);
-        let tag = product.tags[0];
+        let tag = product.tags[0].toUpperCase();
         // console.log(tag);
         let photo = product.Images[0].url_570xN;
         // console.log(photo);
@@ -57,13 +57,13 @@ const paintingData = ((response, e) => {
   <div class="card">
     <div class="card-image">
       <img src="${photo}">
-      <span class="card-title">${price}USD</span>
-      <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
+      <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
-      <p>${tag}</p>
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
-    </div>
+      <a class="waves-effect waves-light btn modal-trigger pink" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i></a>
+      <span class="card-title price-card">${price} USD</span>
+      <h5>${tag}</h5>
+      </div>
   </div>
 </div>
 `

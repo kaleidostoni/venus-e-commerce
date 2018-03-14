@@ -1,33 +1,32 @@
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
 
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+ main {
+   flex: 1 0 auto;
+ }
 
-  main {
-    flex: 1 0 auto;
-  }
-     
-  .logo {
-    width: 80vh;
-    margin-bottom: 0;
-  }
+ .logo {
+   width: 80vh;
+   margin-bottom: 0;
+ }
 
-  #photo {
-    width: 20vw;
-  }
+ #photo {
+   width: 20vw;
+ }
 
-  .photo-container {
-    width: 20vw;
-  }
+ .photo-container {
+   width: 20vw;
+ }
 
-  span.card-title.price-card {
-    color:black;
-    font-weight: 300;
-    background-color: deeppink;
-    padding:10px;
-  }
+ span.card-title.price-card {
+   color:black;
+   font-weight: 300;
+   background-color: deeppink;
+   padding:10px;
+ }
 
   /* #cover{
     width: 100%;
@@ -37,3 +36,4 @@
     height: 40vh;
   } */
   
+

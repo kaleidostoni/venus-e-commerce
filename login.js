@@ -19,7 +19,9 @@ $('#login').click(function(){
         console.log(result.user);
         save(result.user);
         $('#login').hide();
-        $('#pseudo').append('<img src="'+result.user.photoURL+'"/>')
+        $('#pseudo').innerHTML = "";
+        
+        $('#pseudo').append('<img width="50vh" vspace=10vh; src="'+result.user.photoURL+'" />')
       });
       
 });
@@ -39,14 +41,15 @@ function save(user) {
 $('#pseudo').click(function () {
   firebase.database().ref('venus')
   .set({
-    nombre: 'BlisS',
-    edad: '15',
+    // nombre: 'prueba',
+    // edad: '0',
   })        
 });
 
-//Base de datos
-firebase.database().ref('venus')
-.on('child_added', function(s){
-  var user = s.val();
-  $('#pseudo').append('<img width="50vh" src= "'+user.foto+'"/>');  
-})
+// //Base de datos
+// firebase.database().ref('venus')
+// .on('child_added', function(s){
+//   var user = s.val();
+//   $('#pseudo').append('<img width="50vh" vspace=10vh; src= "'+user.foto+'"/>');  
+//   // document.getElementById('login').innerHTML = 'logout';
+// })

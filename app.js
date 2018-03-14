@@ -58,7 +58,7 @@ const paintingData = ((response, e) => {
 <div class="col s12 m3">
   <div class="card">
     <div class="card-image">
-      <img src="${photo}" style='height:50vh'>
+      <img src="${photo}" style='height:45vh'>
       <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">

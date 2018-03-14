@@ -16,8 +16,8 @@
 <body>
     <!-- Navbar -->
     <nav class="nav-extended">
-        <div class="nav-wrapper black">
-            <img src="assets/images/venus.gif" class="logo" alt="logo">
+        <div class="nav-wrapper deep-orange lighten-4">
+            <img src="assets/images/venus-light.png" class="logo" alt="logo">
             <!-- <a href="#" class="brand-logo">VENUS</a> -->
             <a href="#" data-activates="mobile-demo" class="button-collapse">
                 <i class="material-icons">menu</i>
@@ -30,16 +30,14 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="material-icons dropdown-button btn" data-activates='cart'>shopping_bascket</i>
+                        <div class="nav-wrapper deep-orange lighten-4">
+                            <i class="material-icons dropdown-button btn deep-orange lighten-4" data-activates='cart'>shopping_bascket</i>
                     </a>
                     <ul id='cart' class='dropdown-content'>
                     </ul>
                 </li>
                 <li>
-                    <a href="badges.html">Check out</a>
-                </li>
-                <li>
-                    <a href="#" id="login">Log In<span id="pseudo"></span></a>
+                    <a href="#" id="login">Log In</a>
                 </li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
@@ -53,38 +51,49 @@
                     <a href="collapsible.html">Log In</a>
                 </li>
             </ul>
-        </div>
-        <div class="nav-content">
-            <ul class="tabs tabs-transparent" id="menu">
-                <li class="tab">
-                    <a href="#t-shirts" data-menu="womens%20graphic%20tees" data-category="t-shirts" class="router-tshirts">T-shirts</a>
-                </li>
-                <li class="tab">
-                    <a href="#blouses" data-menu="blouse" data-category="blouses" class="router-blouses">Blouses</a>
-                </li>
-                <li class="tab">
-                    <a href="#dresses"data-menu="dress%20for%20women" data-category="dresses" class="router-dresses">Dresses</a>
-                </li>
-                <li class="tab">
-                    <a href="#jeans"  data-menu="jeans%20woman" data-category="jeans" class="router-jeans">Jeans</a>
+            </div>
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent" id="menu">
+                    <li class="tab">
+                        <a href="#home" class="">
+                            <i class="material-icons">home</i>
+                        </a>
+                    </li>
+                    <li class="tab">
+                        <a href="#t-shirts" data-menu="womens%20graphic%20tees" data-category="t-shirts" class="router-tshirts">T-shirts</a>
+                    </li>
+                    <li class="tab">
+                        <a href="#blouses" data-menu="blouse" data-category="blouses" class="router-blouses">Blouses</a>
+                    </li>
+                    <li class="tab">
+                        <a href="#dresses" data-menu="dress%20for%20women" data-category="dresses" class="router-dresses">Dresses</a>
+                    </li>
+                    <li class="tab">
+                        <a href="#jeans" data-menu="jeans%20woman" data-category="jeans" class="router-jeans">Jeans</a>
 
-                </li>
-                <li class="tab">
-                    <a href="#cardigans" data-menu="cardigan%20knit%20woman" data-category="cardigans" class="router-cardigans">Cardigans</a>
-                </li>
-            </ul>
-        </div>
+                    </li>
+                    <li class="tab">
+                        <a href="#cardigans" data-menu="cardigan%20knit%20woman" data-category="cardigans" class="router-cardigans">Cardigans</a>
+                    </li>
+                </ul>
+            </div>
     </nav>
 
 
     <!-- main -->
     <main>
         <section id="container">
-            <div id="t-shirts" class="row">T-SHIRTS</div>
-            <div id="blouses" class="row">BLOUSES</div>
-            <div id="dresses" class="row">DRESSES</div>
-            <div id="jeans" class="row">JEANS</div>
-            <div id="cardigans" class="row">CARDIGANS</div>
+            <div id="home" class="row">
+            <div class="col l8 s12">
+              <img src="assets/images/editorial-venus.jpg" alt="">
+            </div>
+            </div>
+            <!-- tabs] -->
+            <div id="t-shirts" class="row"></div>
+            <div id="blouses" class="row"></div>
+            <div id="dresses" class="row"></div>
+            <div id="jeans" class="row"></div>
+            <div id="cardigans" class="row"></div>
         </section>
     </main>
 
@@ -109,42 +118,42 @@
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
             </div>
         </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Footer Content</h5>
+                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="#!">Link 4</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <footer class="page-footer">
+        <div class="footer-copyright">
             <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Footer Content</h5>
-                        <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                    </div>
-                    <div class="col l4 offset-l2 s12">
-                        <h5 class="white-text">Links</h5>
-                        <ul>
-                            <li>
-                                <a class="grey-text text-lighten-3" href="#!">Link 1</a>
-                            </li>
-                            <li>
-                                <a class="grey-text text-lighten-3" href="#!">Link 2</a>
-                            </li>
-                            <li>
-                                <a class="grey-text text-lighten-3" href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a class="grey-text text-lighten-3" href="#!">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                © 2014 Copyright Text
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
             </div>
-
-            <div class="footer-copyright">
-                <div class="container">
-                    © 2014 Copyright Text
-                    <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-                </div>
-            </div>
-        </footer>
+        </div>
+    </footer>
 
 
 
@@ -152,13 +161,13 @@
 
 
 
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-        <script src="app.js"></script>
-        <script src="login.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="app.js"></script>
+    <script src="login.js"></script>
 </body>
 
 </html>

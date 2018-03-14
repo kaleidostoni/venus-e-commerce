@@ -117,14 +117,38 @@ function saveCartProducts(){
   })
   cartArray.push(selectedProduct)
   localStorage.setItem('cart-data',JSON.stringify(cartArray))
-
-  paintInCart()
 }
+
 
 function paintInCart() {
   let productsArray = JSON.parse(localStorage.getItem('cart-data'));
   // console.log(productsArray);
 }
+
+document
+  .querySelector('.dropdown-button')
+  .addEventListener('click', function paintInCart() {
+    let productsArray = JSON.parse(localStorage.getItem('cart-data'))
+    .forEach(product => {
+      let template = ''
+      template +=
+      `<li>
+        <div class='row'>
+          <img class='col s3' src='${product.Images[0].url_570xN}' alt=''>
+          <div class='col s6'>
+            <p>${product.tags[0]}</p>
+            <p>Fecha de entrega estimada</p>
+          </div>
+          <div class='col s3'>
+            <p>${product.price}</p>
+          </div>
+        </div>
+      </li>`
+      $('#cart').append(template);
+    })
+  })
+
+
 
 // routing
 page('/t-shirts', e => {

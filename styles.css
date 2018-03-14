@@ -10,7 +10,7 @@
   }
      
   .logo {
-    width: 60vh;
+    width: 80vh;
     margin-bottom: 0;
   }
 
@@ -20,6 +20,13 @@
 
   .photo-container {
     width: 20vw;
+  }
+
+  span.card-title.price-card {
+    color:black;
+    font-weight: 300;
+    background-color: deeppink;
+    padding:10px;
   }
 
   

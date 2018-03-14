@@ -159,10 +159,6 @@ document
 
 // routing
 page('/t-shirts', e => {
-<<<<<<< HEAD
-=======
-//  console.log('go');
->>>>>>> upstream/master
 })
 
 page('/blouses', e => {

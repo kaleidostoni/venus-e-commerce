@@ -9,3 +9,17 @@
     flex: 1 0 auto;
   }
      
+  .logo {
+    width: 60vh;
+    margin-bottom: 0;
+  }
+
+  #photo {
+    width: 20vw;
+  }
+
+  .photo-container {
+    width: 20vw;
+  }
+
+  

@@ -1,3 +1,5 @@
+const cartArray = [];
+
 $(document).ready(function () {
     $(".button-collapse").sideNav();
     $('#modal1').modal();
@@ -10,17 +12,29 @@ $(document).ready(function () {
 // const tShirtsURL = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 // const pantsURL = `https://openapi.etsy.com/v2/listings/active?keywords=womans+jeans&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 
+const getProductDetails=()=>{
+let tagData = event.target.dataset.tag;
+let photoData = event.target.dataset.photo;
+let priceData =event.target.dataset.price;
+let name = document.getElementById('name');
+let price = document.getElementById('price');
+let photo = document.getElementById('photo');
+name.innerText = tagData;
+price.innerText = `${priceData} USD`;
+photo.src = photoData;
+}
+
 const placingTemplate = ((template, e) => {
-    console.log(e.target);
-    console.log(e.target.dataset.category);
+    // console.log(e.target);
+    // console.log(e.target.dataset.category);
     let container = document.getElementById('container');
     // console.log(container);
     let divContainers = container.getElementsByTagName('div');
     let divArray = Array.from(divContainers);
-    console.log(divArray);
+    // console.log(divArray);
     divArray.forEach(container => {
         if (container.id === e.target.dataset.category) {
-            console.log(container.id);
+            // console.log(container.id);
             container.innerHTML= template;
         }
     })
@@ -32,7 +46,7 @@ const paintingData = ((response, e) => {
     response.forEach(product => {
         let price = product.price;
         // console.log(price);
-        let tag = product.tags[0];
+        let tag = product.tags[0].toUpperCase();
         // console.log(tag);
         let photo = product.Images[0].url_570xN;
         // console.log(photo);
@@ -43,13 +57,13 @@ const paintingData = ((response, e) => {
   <div class="card">
     <div class="card-image">
       <img src="${photo}">
-      <span class="card-title">${price}</span>
-      <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
+      <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
-      <p>${tag}</p>
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-id='${id}'><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
-    </div>
+      <a class="waves-effect waves-light btn modal-trigger pink" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i></a>
+      <span class="card-title price-card">${price} USD</span>
+      <h5>${tag}</h5>
+      </div>
   </div>
 </div>
 `
@@ -61,7 +75,7 @@ const paintingData = ((response, e) => {
 const handleResponse = ((response, e) => {
     let results = response.results;
     localStorage.setItem('data',JSON.stringify(results))
-    console.log(results)
+    // console.log(results)
     paintingData(results, e);
 })
 
@@ -73,7 +87,6 @@ const requestProducts = (e => {
     // console.log(requestCategory);
 
     let url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=${requestCategory}&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
-    // // const url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
     // console.log(url);
     fetch(url)
         .then(response => response.json()).then(json => handleResponse(json, e));
@@ -96,46 +109,60 @@ const tabList = () => {
 }
 tabList();
 
-const cartArray = []
-
 function saveCartProducts(){
   let productElement = parseInt(event.target.dataset.id);
-  let data = JSON.parse(localStorage.getItem('data'));
-  let selectedProduct = data.find(product => {
+  let selectedProduct = JSON.parse(localStorage.getItem('data')).find(product => {
     return product.listing_id === productElement;
   })
-  cartArray.push(selectedProduct)
+  let productData = {
+    'name': selectedProduct.tags[0],
+    'image': selectedProduct.Images[0].url_570xN,
+    'price': selectedProduct.price
+  }
+  cartArray.push(productData)
   localStorage.setItem('cart-data',JSON.stringify(cartArray))
+}
+
+
+function paintInCart() {
+  let productsArray = JSON.parse(localStorage.getItem('cart-data'));
+  // console.log(productsArray);
 }
 
 document
   .querySelector('.dropdown-button')
-  .addEventListener('click', function paintInCart() {
+  .addEventListener('click', function () {
+    $('#cart-detail').empty();
     let productsArray = JSON.parse(localStorage.getItem('cart-data'))
     .forEach(product => {
       let template = ''
       template +=
       `<li>
         <div class='row'>
-          <img class='col s3' src='${product.Images[0].url_570xN}' alt=''>
-          <div class='col s6'>
-            <p>${product.tags[0]}</p>
-            <p>Fecha de entrega estimada</p>
+          <img class='col s3' src='${product.image}' alt=''>
+          <div class='col s7'>
+            <p>${product.name}</p>
+            <p>Fecha estimada de entrega</p>
           </div>
-          <div class='col s3'>
+          <div class='col s2'>
             <p>${product.price}</p>
           </div>
         </div>
       </li>`
-      $('#cart').append(template);
+      $('#cart-detail')
+      .append(template);
     })
+    let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
+    .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
+    $('.total-cart').text(totalCart)
   })
-
-
 
 // routing
 page('/t-shirts', e => {
- console.log('go');
+<<<<<<< HEAD
+=======
+//  console.log('go');
+>>>>>>> upstream/master
 })
 
 page('/blouses', e => {

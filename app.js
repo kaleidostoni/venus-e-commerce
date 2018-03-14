@@ -58,9 +58,9 @@ const paintingData = ((response, e) => {
       <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
-      <h5>${tag}</h5>
       <a class="waves-effect waves-light btn modal-trigger pink" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i></a>
       <span class="card-title price-card">${price} USD</span>
+      <h5>${tag}</h5>
       </div>
   </div>
 </div>

@@ -4,7 +4,6 @@ $(document).ready(function () {
   $(".button-collapse").sideNav();
   $('#modal1').modal();
   $('.carousel.carousel-slider').carousel({fullWidth: true});
-
 })
 
 // const cardigansURL = `https://openapi.etsy.com/v2/listings/active?keywords=cardigan%20knit%20woman&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
@@ -44,18 +43,17 @@ const placingTemplate = ((template, e) => {
 })
 
 const paintingData = ((response, e) => {
-
-    let template = ' ';
-    response.forEach(product => {
-        let price = product.price;
-        // console.log(price);
-        let tag = product.tags[0];
-        // console.log(tag);
-        let photo = product.Images[0].url_570xN;
-        // console.log(photo);
-        let id = product.listing_id
-        // console.log(id);
-        template += `
+  let template = ' ';
+  response.forEach(product => {
+    let price = product.price;
+    // console.log(price);
+    let tag = product.tags[0].toUpperCase();
+    // console.log(tag);
+    let photo = product.Images[0].url_570xN;
+    // console.log(photo);
+    let id = product.listing_id
+    // console.log(id);
+    template += `
 <div class="col s12 m3">
   <div class="card">
     <div class="card-image">
@@ -68,11 +66,11 @@ const paintingData = ((response, e) => {
       <span class="card-title price-card">${price} USD</span>
       </div>
   </div>
-</div>
-`
+</div>`
   })
   placingTemplate(template, e);
 })
+
 
 // //guardando data
 const handleResponse = ((response, e) => {
@@ -111,7 +109,6 @@ const tabList = () => {
   eventMenu(menuArray);
 }
 tabList();
-
 
 //función que almacena los productos seleccionados por el usuario
 function saveCartProducts(){
@@ -196,8 +193,6 @@ document
               }
           }, '#paypal-button-container');
       }
-
-
 
 // funciones para routing
 page('/t-shirts', e => {

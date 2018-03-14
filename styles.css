@@ -32,3 +32,20 @@
     padding:10px;
   }
 
+#add-bag {
+  background-color: #1a237e;
+  color: #ffff; 
+  border: 14px solid #1a237e;
+  width: 33vh;
+  margin-bottom: 52vh;
+}
+
+#name {
+  padding: 1.5vh;
+  border-bottom: 1.4px dotted gray;
+}
+
+#price {
+  border-bottom: 6px dotted  deeppink;
+}
+

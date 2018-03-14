@@ -46,7 +46,7 @@ const paintingData = ((response, e) => {
     response.forEach(product => {
         let price = product.price;
         // console.log(price);
-        let tag = product.tags[0].toUpperCase();
+        let tag = product.tags[0];
         // console.log(tag);
         let photo = product.Images[0].url_570xN;
         // console.log(photo);
@@ -159,10 +159,7 @@ document
 
 // routing
 page('/t-shirts', e => {
-<<<<<<< HEAD
-=======
 //  console.log('go');
->>>>>>> upstream/master
 })
 
 page('/blouses', e => {

@@ -12,17 +12,29 @@ $(document).ready(function () {
 // const tShirtsURL = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 // const pantsURL = `https://openapi.etsy.com/v2/listings/active?keywords=womans+jeans&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 
+const getProductDetails=()=>{
+let tagData = event.target.dataset.tag;
+let photoData = event.target.dataset.photo;
+let priceData =event.target.dataset.price;
+let name = document.getElementById('name');
+let price = document.getElementById('price');
+let photo = document.getElementById('photo');
+name.innerText = tagData;
+price.innerText = `${priceData} USD`;
+photo.src = photoData;
+}
+
 const placingTemplate = ((template, e) => {
-    console.log(e.target);
-    console.log(e.target.dataset.category);
+    // console.log(e.target);
+    // console.log(e.target.dataset.category);
     let container = document.getElementById('container');
     // console.log(container);
     let divContainers = container.getElementsByTagName('div');
     let divArray = Array.from(divContainers);
-    console.log(divArray);
+    // console.log(divArray);
     divArray.forEach(container => {
         if (container.id === e.target.dataset.category) {
-            console.log(container.id);
+            // console.log(container.id);
             container.innerHTML= template;
         }
     })
@@ -45,12 +57,12 @@ const paintingData = ((response, e) => {
   <div class="card">
     <div class="card-image">
       <img src="${photo}">
-      <span class="card-title">${price}</span>
+      <span class="card-title">${price}USD</span>
       <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
       <p>${tag}</p>
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-id='${id}'><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
+      <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
     </div>
   </div>
 </div>
@@ -63,7 +75,7 @@ const paintingData = ((response, e) => {
 const handleResponse = ((response, e) => {
     let results = response.results;
     localStorage.setItem('data',JSON.stringify(results))
-    console.log(results)
+    // console.log(results)
     paintingData(results, e);
 })
 
@@ -75,7 +87,6 @@ const requestProducts = (e => {
     // console.log(requestCategory);
 
     let url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=${requestCategory}&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
-    // // const url = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
     // console.log(url);
     fetch(url)
         .then(response => response.json()).then(json => handleResponse(json, e));
@@ -96,7 +107,6 @@ const tabList = () => {
     // console.log(menuArray);
     eventMenu(menuArray);
 }
-
 tabList();
 
 function saveCartProducts(){
@@ -111,6 +121,12 @@ function saveCartProducts(){
   }
   cartArray.push(productData)
   localStorage.setItem('cart-data',JSON.stringify(cartArray))
+}
+
+
+function paintInCart() {
+  let productsArray = JSON.parse(localStorage.getItem('cart-data'));
+  // console.log(productsArray);
 }
 
 document
@@ -138,10 +154,8 @@ document
     })
     let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
     .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
-    $('.total-cart').text(totalCart.toFixed(2))
+    $('.total-cart').text(totalCart)
   })
-
-
 
 // routing
 page('/t-shirts', e => {

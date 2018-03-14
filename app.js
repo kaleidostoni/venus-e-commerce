@@ -1,8 +1,9 @@
 const cartArray = [];
 
 $(document).ready(function () {
-    $(".button-collapse").sideNav();
-    $('#modal1').modal();
+  $(".button-collapse").sideNav();
+  $('#modal1').modal();
+  $('.carousel.carousel-slider').carousel({fullWidth: true});
 })
 
 // const cardigansURL = `https://openapi.etsy.com/v2/listings/active?keywords=cardigan%20knit%20woman&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
@@ -11,6 +12,18 @@ $(document).ready(function () {
 // const underwaerURL = `https://openapi.etsy.com/v2/listings/active?keywords=bralette&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 // const tShirtsURL = `https://cors-anywhere.herokuapp.com/https://openapi.etsy.com/v2/listings/active?keywords=womens%20graphic%20tees&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
 // const pantsURL = `https://openapi.etsy.com/v2/listings/active?keywords=womans+jeans&includes=Images:1&api_key=llkjywrb9bbj142bo4qbp1t5`
+
+const getProductDetails = () => {
+  let tagData = event.target.dataset.tag;
+  let photoData = event.target.dataset.photo;
+  let priceData = event.target.dataset.price;
+  let name = document.getElementById('name');
+  let price = document.getElementById('price');
+  let photo = document.getElementById('photo');
+  name.innerText = tagData;
+  price.innerText = `${priceData} USD`;
+  photo.src = photoData;
+}
 
 const placingTemplate = ((template, e) => {
     console.log(e.target);
@@ -30,34 +43,35 @@ const placingTemplate = ((template, e) => {
 })
 
 const paintingData = ((response, e) => {
-    let template = ' ';
-    response.forEach(product => {
-        let price = product.price;
-        // console.log(price);
-        let tag = product.tags[0];
-        // console.log(tag);
-        let photo = product.Images[0].url_570xN;
-        // console.log(photo);
-        let id = product.listing_id
-        // console.log(id);
-        template += `
+  let template = ' ';
+  response.forEach(product => {
+    let price = product.price;
+    // console.log(price);
+    let tag = product.tags[0].toUpperCase();
+    // console.log(tag);
+    let photo = product.Images[0].url_570xN;
+    // console.log(photo);
+    let id = product.listing_id
+    // console.log(id);
+    template += `
 <div class="col s12 m3">
   <div class="card">
     <div class="card-image">
       <img src="${photo}">
-      <span class="card-title">${price}</span>
-      <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
+      <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
-      <p>${tag}</p>
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-id='${id}'><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
-    </div>
+      <h5>${tag}</h5>
+      <a class="waves-effect waves-light btn modal-trigger pink" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i></a>
+      <span class="card-title price-card">${price} USD</span>
+      </div>
   </div>
 </div>
 `
-    })
-    placingTemplate(template, e);
+  })
+  placingTemplate(template, e);
 })
+
 
 // //guardando data
 const handleResponse = ((response, e) => {
@@ -99,6 +113,7 @@ const tabList = () => {
 
 tabList();
 
+//función que almacena los productos seleccionados por el usuario
 function saveCartProducts(){
   let productElement = parseInt(event.target.dataset.id);
   let selectedProduct = JSON.parse(localStorage.getItem('data')).find(product => {
@@ -113,6 +128,7 @@ function saveCartProducts(){
   localStorage.setItem('cart-data',JSON.stringify(cartArray))
 }
 
+//función que pinta los datos en el carrito
 document
   .querySelector('.dropdown-button')
   .addEventListener('click', function () {
@@ -136,12 +152,50 @@ document
       $('#cart-detail')
       .append(template);
     })
-    let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
-    .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
-    $('.total-cart').text(totalCart.toFixed(2))
+    getTotalCart()
   })
 
+//función para obtener el total de los productos seleccionados
+  function getTotalCart() {
+    let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
+    .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
+    $('.total-cart').text(totalCart)
+    getPayPal(totalCart)
+  }
 
+//función para hacer el pago con paypal
+  function getPayPal (totalPrice){
+    $('#paypal-button-container').empty()
+    paypal.Button.render({
+              env: 'sandbox', // sandbox | production
+              client: {
+                sandbox:    'Aewf8tYWTalhPJNghUNrkbJKjalm-V29rMgPQJb5AzbXdrF-2GpArX30Cu07PdmGlRdaGqE1Uq0GcGbe',
+                production: '<insert production client id>'
+              },
+              // Show the buyer a 'Pay Now' button in the checkout flow
+              commit: true,
+              // payment() is called when the button is clicked
+              payment: function(data, actions) {
+                  // Make a call to the REST api to create the payment
+                  return actions.payment.create({
+                      payment: {
+                          transactions: [
+                              {
+                                  amount: { total: `${totalPrice}`, currency: 'USD' }
+                              }
+                          ]
+                      }
+                  });
+              },
+              // onAuthorize() is called when the buyer approves the payment
+              onAuthorize: function(data, actions) {
+                  // Make a call to the REST api to execute the payment
+                  return actions.payment.execute().then(function() {
+                      window.alert('Payment Complete!');
+                  });
+              }
+          }, '#paypal-button-container');
+      }
 
 // routing
 page('/t-shirts', e => {

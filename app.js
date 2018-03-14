@@ -57,13 +57,13 @@ const paintingData = ((response, e) => {
   <div class="card">
     <div class="card-image">
       <img src="${photo}">
-      <span class="card-title">${price}USD</span>
-      <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
+      <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
-      <p>${tag}</p>
-      <a class="waves-effect waves-light btn modal-trigger" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons left">remove_red_eye</i>QUICK VIEW</a>
-    </div>
+      <a class="waves-effect waves-light btn modal-trigger pink" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i></a>
+      <span class="card-title price-card">${price} USD</span>
+      <h5>${tag}</h5>
+      </div>
   </div>
 </div>
 `
@@ -109,6 +109,7 @@ const tabList = () => {
 }
 tabList();
 
+//función que almacena los productos seleccionados por el usuario
 function saveCartProducts(){
   let productElement = parseInt(event.target.dataset.id);
   let selectedProduct = JSON.parse(localStorage.getItem('data')).find(product => {
@@ -123,12 +124,7 @@ function saveCartProducts(){
   localStorage.setItem('cart-data',JSON.stringify(cartArray))
 }
 
-
-function paintInCart() {
-  let productsArray = JSON.parse(localStorage.getItem('cart-data'));
-  // console.log(productsArray);
-}
-
+//función que pinta los datos en el carrito
 document
   .querySelector('.dropdown-button')
   .addEventListener('click', function () {
@@ -152,17 +148,55 @@ document
       $('#cart-detail')
       .append(template);
     })
+    getTotalCart()
+  })
+
+//función para obtener el total de los productos seleccionados
+  function getTotalCart() {
     let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
     .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
     $('.total-cart').text(totalCart)
-  })
+    getPayPal(totalCart)
+  }
 
-// routing
+//función para hacer el pago con paypal
+  function getPayPal (totalPrice){
+    $('#paypal-button-container').empty()
+    paypal.Button.render({
+              env: 'sandbox', // sandbox | production
+              client: {
+                sandbox:    'Aewf8tYWTalhPJNghUNrkbJKjalm-V29rMgPQJb5AzbXdrF-2GpArX30Cu07PdmGlRdaGqE1Uq0GcGbe',
+                production: '<insert production client id>'
+              },
+              // Show the buyer a 'Pay Now' button in the checkout flow
+              commit: true,
+              // payment() is called when the button is clicked
+              payment: function(data, actions) {
+                  // Make a call to the REST api to create the payment
+                  return actions.payment.create({
+                      payment: {
+                          transactions: [
+                              {
+                                  amount: { total: `${totalPrice}`, currency: 'USD' }
+                              }
+                          ]
+                      }
+                  });
+              },
+              // onAuthorize() is called when the buyer approves the payment
+              onAuthorize: function(data, actions) {
+                  // Make a call to the REST api to execute the payment
+                  return actions.payment.execute().then(function() {
+                      window.alert('Payment Complete!');
+                  });
+              }
+          }, '#paypal-button-container');
+      }
+
+
+
+// funciones para routing
 page('/t-shirts', e => {
-<<<<<<< HEAD
-=======
-//  console.log('go');
->>>>>>> upstream/master
 })
 
 page('/blouses', e => {

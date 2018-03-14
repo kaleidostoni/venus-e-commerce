@@ -1,3 +1,4 @@
+
   body {
     display: flex;
     min-height: 100vh;
@@ -31,6 +32,54 @@
     background-color: deeppink;
     padding:10px;
   }
+
+body {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ main {
+   flex: 1 0 auto;
+ }
+
+ .logo {
+   width: 80vh;
+   margin-bottom: 0;
+ }
+
+ #photo {
+   width: 20vw;
+ }
+
+ .photo-container {
+   width: 20vw;
+ }
+
+ span.card-title.price-card {
+   color:black;
+   font-weight: 300;
+   background-color: deeppink;
+   padding:10px;
+ }
+
+ #name {
+  padding: 1.5vh;
+  border-bottom: 1.4px dotted gray;
+}
+
+#price {
+  border-bottom: 6px dotted  deeppink;
+}
+
+
+#add-bag {
+  background-color: #1a237e;
+  color: #ffff; 
+  border: 14px solid #1a237e;
+  width: 33vh;
+  margin-bottom: 52vh;
+}
 
 
   /* #cover{

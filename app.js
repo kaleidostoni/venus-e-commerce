@@ -107,7 +107,6 @@ const tabList = () => {
     // console.log(menuArray);
     eventMenu(menuArray);
 }
-
 tabList();
 
 function saveCartProducts(){
@@ -155,10 +154,8 @@ document
     })
     let totalCart = JSON.parse(localStorage.getItem('cart-data')).map(item => item.price)
     .reduce((prev, cur) => parseFloat(prev) + parseFloat(cur))
-    $('.total-cart').text(totalCart.toFixed(2))
+    $('.total-cart').text(totalCart)
   })
-
-
 
 // routing
 page('/t-shirts', e => {

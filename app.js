@@ -47,7 +47,7 @@ const paintingData = ((response, e) => {
   response.forEach(product => {
     let price = product.price;
     // console.log(price);
-    let tag = product.tags[0].toUpperCase();
+    let tag = product.tags[0];
     // console.log(tag);
     let photo = product.Images[0].url_570xN;
     // console.log(photo);
@@ -57,11 +57,11 @@ const paintingData = ((response, e) => {
 <div class="col s12 m3">
   <div class="card">
     <div class="card-image">
-      <img src="${photo}" style='height:55vh'>
+      <img src="${photo}" style='height:45vh'>
       <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
-      <h5>${tag}</h5>
+      <h6>${tag}</h6>
       <a class="waves-effect waves-light btn modal-trigger pink center" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i>  Quick View</a>
       <span class="card-title price-card">${price} USD</span>
       </div>
@@ -131,7 +131,7 @@ document
   .addEventListener('click', function () {
     $('#cart-detail').empty();
     let productsArray = JSON.parse(localStorage.getItem('cart-data'))
-      .forEach(product => {
+    .forEach(product => {
         let template = ''
         template +=
           `<li>

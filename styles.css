@@ -102,6 +102,11 @@ body {
   padding:30px;
   font-weight: 600;
 }
+
+.product {
+  font-size: 1.3em;
+
+}
   /* #cover{
     width: 100%;
   } */

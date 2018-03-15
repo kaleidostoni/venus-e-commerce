@@ -24,32 +24,34 @@
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
+                    <a href="#">
+                        <div class="nav-wrapper pink">
+                           <i class="material-icons dropdown-button btn black" data-activates='cart'>add_shopping_cart carrito carr</i>
+                 </a>
+                    <ul id='cart' class='dropdown-content'>
+                        <li class="deep-orange lighten-4">
+                            <div class="">My bag</div>
+                        </li>
+                        <li>
+                            <ul id='cart-detail'>
+
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Total $
+                                <span class="total-cart">0.00</span>
+                            </p>
+                            <div id="paypal-button-container"></div>
+                        </li>
+                    </ul>
+                </li>
+                <li>
                     <a href="sass.html">
                         <i class="material-icons">favorite</i>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <div class="nav-wrapper pink">
-                            <i class="material-icons dropdown-button btn black" data-activates='cart'>shopping_bascket</i>
-                    </a>
-                    <ul id='cart' class='dropdown-content'>
-                      <li class="deep-orange lighten-4">
-                        <div class="">My bag</div>
-                      </li>
-                      <li>
-                        <ul id='cart-detail'>
-
-                        </ul>
-                      </li>
-                      <li>
-                        <p>Total $<span class="total-cart">0.00</span></p>
-                        <div id="paypal-button-container"></div>
-                      </li>
-                    </ul>
-                </li>
-                <li>
-                    <a  id="login">Log In</a>
+                    <a id="login">Log In</a>
                     <span id="pseudo"></span>
                 </li>
             </ul>
@@ -118,7 +120,29 @@
                     </div>
                 </div>
 
-<!-- <div class="col l8 s12">
+            <div class="row center spree">
+                <div class="col l6 s6">
+                   <img src="assets/images/spree1.jpg" alt=""class="spree-img"> 
+                   <a class="waves-effect waves-light btn click">T-SHIRTS</a>
+                </div>
+                <div class="col l6 s6">
+                    <img src="assets/images/spree2.jpg" alt=""class="spree-img"> 
+                    <a class="waves-effect waves-light btn click2 purple lighten-2">DRESSES</a>
+                </div>
+            </div>
+
+            <div class="row center spree">
+                <div class="col l6 s6">
+                   <img src="assets/images/spree3.jpg" alt=""class="spree-img"> 
+                   <a class="waves-effect waves-light btn click  amber">BLOUSES</a>
+                </div>
+                <div class="col l6 s6">
+                    <img src="assets/images/spree4.jpg" alt=""class="spree-img"> 
+                    <a class="waves-effect waves-light btn click2 blue darken-1">CARDIGANS</a>
+                </div>
+            </div>
+
+                <!-- <div class="col l8 s12">
               <img src="assets/images/editorial-venus.jpg" alt=""  id="cover">
             </div> -->
             </div>
@@ -136,26 +160,26 @@
         <div class="modal-content">
             <div class="container">
                 <div class="row">
-                        <h4 id="name"></h4>
-                        <div class="col l7 s12" id="photo-container">
-                            <img id='photo'src="" alt="">
-                        </div>
-                        <div class="col l5 s12">
-                            <h5 id="price"></h5>
-                            <h6>SIZES</h6>
-                            <span>XS | S | M | L | XL</span>
-                        </div>
+                    <h4 id="name"></h4>
+                    <div class="col l7 s12" id="photo-container">
+                        <img id='photo' src="" alt="">
                     </div>
-                    <a href="#" class="center" id="add-bag">Add to bag</a>
-
-                   
+                    <div class="col l5 s12">
+                        <h5 id="price"></h5>
+                        <h6>SIZES</h6>
+                        <span>XS | S | M | L | XL</span>
+                    </div>
                 </div>
+                <a href="#" class="center" id="add-bag">Add to bag</a>
+
 
             </div>
-            <!-- <div class="modal-footer">
+
+        </div>
+        <!-- <div class="modal-footer">
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
             </div> -->
-        </div>
+    </div>
     </div>
 
     <footer class="page-footer  blue darken-1">
@@ -183,7 +207,7 @@
                             <a class="grey-text text-lighten-3" href="#!">Jeans</a>
                         </li>
                         <li>
-                                <a class="grey-text text-lighten-3" href="#!">Cardigans</a>
+                            <a class="grey-text text-lighten-3" href="#!">Cardigans</a>
                         </li>
                     </ul>
                 </div>

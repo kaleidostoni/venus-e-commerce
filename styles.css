@@ -81,7 +81,27 @@ body {
   margin-bottom: 52vh;
 }
 
+.spree {
+  margin-top: 7vh;
+}
 
+.spree-img{
+  position:relative;
+}
+
+.click {
+  position:absolute;
+  left:30vw;
+  padding:30px;
+  font-weight: 600;
+}
+
+.click2 {
+  position:absolute;
+  left:59.3vw;
+  padding:30px;
+  font-weight: 600;
+}
   /* #cover{
     width: 100%;
   } */
@@ -89,3 +109,4 @@ body {
     height: 40vh;
   } */
   
+

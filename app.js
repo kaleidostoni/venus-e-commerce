@@ -61,7 +61,7 @@ const paintingData = ((response, e) => {
       <a class="btn-floating halfway-fab waves-effect waves-light black"><i class="material-icons add-cart" data-id='${id}' onclick="saveCartProducts()">add</i></a>
     </div>
     <div class="card-content">
-      <p class="product">${tag}</p>
+      <h6>${tag}</h6>
       <a class="waves-effect waves-light btn modal-trigger pink center" href="#modal1" data-id='${id}' data-tag='${tag}'data-photo='${photo}' data-price='${price}'onclick="getProductDetails()"><i class="material-icons">remove_red_eye</i>  Quick View</a>
       <span class="card-title price-card">${price} USD</span>
       </div>
@@ -131,7 +131,7 @@ document
   .addEventListener('click', function () {
     $('#cart-detail').empty();
     let productsArray = JSON.parse(localStorage.getItem('cart-data'))
-      .forEach(product => {
+    .forEach(product => {
         let template = ''
         template +=
           `<li>

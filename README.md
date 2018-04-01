@@ -50,3 +50,5 @@ ___
 ___
 
 ![venus3](https://user-images.githubusercontent.com/32855070/38178404-ffe8b04c-35d7-11e8-83d2-3bf56121e9bb.png)
+___
+***Desarrollado para < Laboratoria >***
